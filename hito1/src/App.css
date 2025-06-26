@@ -1,0 +1,122 @@
+#root {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+
+
+/* CSS PERSONALIZADO */
+#headerPizza {
+  background-image: url(assets/img/Header.jpg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: #FFF;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 20vh;
+}
+
+#headerPizza h1 {
+  z-index: 1;
+  margin: 0;
+}
+
+#headerPizza p {
+  z-index: 1;
+  margin: 0;
+}
+
+#headerPizza::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+  /* negro 50% */
+}
+
+nav {
+  background-color: #1e2527;
+  padding: 10px 10px;
+}
+
+nav h5 {
+  margin: 0;
+  color: #FFF;
+  cursor: pointer;
+}
+
+button {
+  background-color: transparent;
+  border-color: #FFF;
+  border-width: 1px;
+  color: #FFF;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  margin: 0px 5px;
+  display: flex;
+  align-items: center;
+}
+
+button#valorTotal {
+  color: #0ea098;
+  border-color: #0ea098;
+}
+
+button:hover {
+  border-color: #716a54;
+}
+
+.material-symbols-outlined {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding-right: 2px;
+}
+
+.card {
+  width: 25%;
+  padding: 0px;
+}
+
+.card button {
+  border-color: #202428;
+  color: #202428;
+  padding: 5px 10px;
+}
+
+.card button.add {
+  background-color: #202428;
+  color: #FFF;
+  border-color: transparent;
+}
+
+.card h5 {
+  color: #4b535a;
+}
+
+.font-size-14 {
+  font-size: 14px;
+}
+
+footer {
+  background-color: #202428;
+  color: #FFF;
+  min-height: 5vh;
+}
+
+.row{
+  --bs-gutter-x:0px;
+}
