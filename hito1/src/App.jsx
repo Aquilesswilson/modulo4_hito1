@@ -4,13 +4,26 @@ import Home from './Components/Home'
 import Footer from './Components/Footer'
 import './App.css'
 
+import RegisterPage from './Components/RegisterPage'
+import LoginPage from './Components/LoginPage'
+
 function App() {
-  const [count, setCount] = useState(0)
+  const token = true;
 
   return (
     <>
       <Navbar />
-      <Home />
+      {/* <Home /> */}
+      {!token ? (
+        <>
+          <RegisterPage />
+        </>
+      ) : (
+        <>
+          <LoginPage/>
+        </>
+      )
+      }
       <Footer />
     </>
   )
