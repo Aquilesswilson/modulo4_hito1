@@ -2,19 +2,22 @@ import { Component } from 'react'
 
 export default class CardPizza extends Component {
     render() {
-        const { name, price, ingredients, img } = this.props
+        const { desc, name, price, ingredients, img } = this.props
         return (
             <div className='card' >
                 <img src={img} className='card-img-top' alt={name}></img>
                 <div className='card-body'>
                     <h4 className='card-title'>{name}</h4>
+                    <p>{desc}</p>
+
                 </div>
                 <ul className='list-group list-group-flush'>
                     <h5 className='text-center'>Ingredientes: </h5>
-                    <div className='row align-items-center justify-content-center'>
-                        <span className='col-auto material-symbols-outlined'>local_pizza</span><span className='col-auto font-size-14'>{ingredients.join(", ")}</span>
-                    </div>
-
+                    <ul className='d-flex flex-column align-items-center'>
+                        {ingredients.map((ingrediente, index) =>
+                            <li key={index}>{ingrediente}</li>
+                        )}
+                    </ul>
                 </ul>
                 <div className='card-body'>
                     <h3 className='text-center'>Precio: ${price.toLocaleString('es-CL')}</h3>
