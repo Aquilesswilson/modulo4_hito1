@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import react from 'react'
 import Navbar from './Components/Navbar'
-import Cart from './Components/Cart'
+// import Cart from './Components/Cart'
 // import Home from './Components/Home'
+import Pizza from './Components/Pizza'
 import Footer from './Components/Footer'
 import './App.css'
 
@@ -14,8 +15,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <Cart/>
+      {/* <Cart/> */}
       {/* <Home /> */}
+      <Pizza />
       <Footer />
       {/* {!token ? (
         <>
