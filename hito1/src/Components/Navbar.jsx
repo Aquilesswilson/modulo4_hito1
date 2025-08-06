@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 export default class Navbar extends Component {
     render() {
@@ -11,17 +12,18 @@ export default class Navbar extends Component {
                 <div className='col'>
                     <div className='row align-items-center'>
                         <h5 className='col-auto'>Pizzería Mamma Mia!</h5>
-                        <button className='col-auto'><span className='material-symbols-outlined'>local_pizza</span>Home</button>
+                        <Link to="/" className='btn btn-outline-primary d-flex m-1 col-auto'><span className=' pe-1 material-symbols-outlined'>local_pizza</span>Home</Link>
+                        <Link to="/404" className='btn btn-outline-primary d-flex m-1 col-auto'><span className=' pe-1 material-symbols-outlined'>local_pizza</span>404</Link>
                         {!token ? (
                             <>
-                                <button className='col-auto'><span className='material-symbols-outlined'>key</span>Login</button>
-                                <button className='col-auto'><span className='material-symbols-outlined'>vpn_key_alert</span>Register</button>
+                                <Link to="/login" className='btn btn-outline-primary d-flex m-1 col-auto'><span className='material-symbols-outlined'>key</span>Login</Link>
+                                <Link to="/register" className='btn btn-outline-primary d-flex m-1 col-auto'><span className='material-symbols-outlined'>vpn_key_alert</span>Register</Link>
+                                <Link to="/profile" className='btn btn-outline-primary d-flex m-1 col-auto'><span className='material-symbols-outlined'>lock</span>Profile</Link>
+                                <Link className='btn btn-outline-primary d-flex m-1 col-auto'><span className='material-symbols-outlined'>lock_open_right</span>Logout</Link>
                             </>
                         ) : (
                             <>
 
-                                <button className='col-auto'><span className='material-symbols-outlined'>lock</span>Profile</button>
-                                <button className='col-auto'><span className='material-symbols-outlined'>lock_open_right</span>Logout</button>
                             </>
                         )
                         }
@@ -29,7 +31,7 @@ export default class Navbar extends Component {
 
                 </div>
                 <div className='col-auto'>
-                    <button id='valorTotal'><span className='material-symbols-outlined'>shopping_cart</span>Total: $ {total.toLocaleString('es-CL')}</button>
+                    <Link to="/cart" id='valorTotal' className='btn btn-outline-success d-flex m-1'><span className='material-symbols-outlined'>shopping_cart</span>Total: $ {total.toLocaleString('es-CL')}</Link>
                 </div>
             </nav>
         )
