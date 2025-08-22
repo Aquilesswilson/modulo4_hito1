@@ -1,15 +1,16 @@
 import { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { useCart } from '../Context/ContextCart'
 
 
 export default function CardPizza({ desc, name, price, ingredients, img, id }) {
-    const {agregarAlCarrito} = useCart();
+    const { agregarAlCarrito } = useCart();
     const handleAdd = () => {
         const item = {
-            id : id ?? name,
+            id: id ?? name,
             price: Number(price) || 0,
             name: name,
-            img : img || '',
+            img: img || '',
         }
         agregarAlCarrito(item)
     }
@@ -34,7 +35,7 @@ export default function CardPizza({ desc, name, price, ingredients, img, id }) {
             <div className='card-body'>
                 <h3 className='text-center'>Precio: ${price.toLocaleString('es-CL')}</h3>
                 <div className='row justify-content-around'>
-                    <button className='col-auto'><span className='material-symbols-outlined'>eyeglasses_2</span>Ver más</button>
+                    <Link to={`/pizza/${id}`} className='col-auto d-flex btn btn-outline-secondary'><span className='col-auto material-symbols-outlined'>eyeglasses_2</span>Ver más</Link>                    
                     <button className='col-auto add' onClick={handleAdd}><span className='material-symbols-outlined'>add_shopping_cart</span>Añadir</button>
                 </div>
             </div>

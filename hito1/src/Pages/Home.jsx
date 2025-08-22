@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Header from '../Components/header'
+import Header from '../Components/Header'
 import CardPizza from '../Components/CardPizza'
 // import { pizzas } from '../assets/js/pizzas'
 

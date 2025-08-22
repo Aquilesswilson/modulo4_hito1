@@ -1,40 +1,79 @@
 import react from 'react'
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Navbar from './Components/Navbar'
-// import Cart from './Components/Cart'
-// import Home from './Components/Home'
-import Cart from './Pages/Cart';
-import LoginPage from './Pages/LoginPage';
-import Pizza from './Pages/Pizza';
-import RegisterPage from './Pages/RegisterPage';
-import Footer from './Components/Footer';
-import './App.css';
+
 import Home from './Pages/Home';
+import LoginPage from './Pages/LoginPage';
+import RegisterPage from './Pages/RegisterPage';
+import Profile from './Pages/Profile';
+import Cart from './Pages/Cart';
+import Pizza from './Pages/Pizza';
 import NotFound from './Pages/NotFound';
-import Profile from './Components/Profile';
+import './App.css';
 
-// import RegisterPage from './Components/RegisterPage'
-// import LoginPage from './Components/LoginPage'
+import { useUser } from './Context/UserContext';
+import ProtectedRoute from './Components/ProtectedRoutes';
 
-function App() {
-  const token = true;
 
+
+function SiEstaLogeado({ children }) {
+  const { token } = useUser()
+  if (!token) {
+    return children;
+  } else {
+    return <Navigate to='/' replace />
+  }
+
+
+
+}
+export default function App() {
   return (
     <>
       <Navbar />
+
       <Routes>
-        <Route path='/cart' element={<Cart />} />
         <Route path='/' element={<Home />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/pizza/p001' element={<Pizza />} />
-        <Route path='/register' element={<RegisterPage />} />
-        <Route path='/404' element={<NotFound />} />
-        <Route path='/profile' element={<Profile />} />
+
+        <Route path="/pizza/:id" element={<Pizza />} />
+        <Route path='/cart' element={<Cart />} />
+
+        <Route
+          path='/login'
+          element={
+            <SiEstaLogeado>
+              <LoginPage />
+            </SiEstaLogeado>
+          }
+        />
+
+        <Route
+          path='/register'
+          element={
+            <SiEstaLogeado>
+              <RegisterPage></RegisterPage>
+            </SiEstaLogeado>
+
+          }
+        />
+
+        <Route path='*' element={<NotFound />} />
+
+        <Route path='/profile'
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+
+
       </Routes>
     </>
 
   )
 }
 
-export default App
+

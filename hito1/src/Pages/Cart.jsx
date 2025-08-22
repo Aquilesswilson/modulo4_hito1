@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { pizzaCart } from '../assets/js/pizzas'
-import { useCart } from '../context/ContextCart'
+import { useCart } from '../Context/ContextCart'
+import { useUser } from '../Context/UserContext';
 
 export default function Cart() {
     const { cart, aumentar, disminuir, eliminarDelCarrito, limpiarCarrito, total } = useCart();
+    const { token } = useUser();
 
     if (cart.length === 0) {
         return (
@@ -63,7 +65,14 @@ export default function Cart() {
             </div>
             <div className="row">
                 <div className="col-12">
-                    <button className='btn btn-dark'>Pagar</button>
+                    {!token ? (
+                        <>
+                            <button className='btn btn-dark' disabled>Pagar</button>
+                        </>) : (
+                        <>
+                            <button className='btn btn-dark'>Pagar</button>
+                        </>
+                    )}                    
                 </div>
             </div>
         </div>
