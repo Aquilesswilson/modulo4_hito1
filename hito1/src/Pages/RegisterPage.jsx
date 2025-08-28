@@ -1,13 +1,25 @@
 import { Component, useState } from 'react'
+import { useUser } from '../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
-const RegisterPage = () => {
+export default function RegisterPage() {
+
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repetirPassword, setRepetirPassword] = useState('');
+
     const [mensaje, setMensaje] = useState('');
     const [mensajeExito, setMensajeExito] = useState('');
+    const [cargando, setCargando] = useState(false);
 
-    const alEnviarFormulario = (e) => {
+    const { register } = useUser();
+    const navigate = useNavigate();
+
+    const alEnviarFormulario = async (e) => {
+
+        setMensaje('');
+        setMensajeExito('');
 
         e.preventDefault();
 
@@ -25,6 +37,23 @@ const RegisterPage = () => {
         } else {
             setMensajeExito('Se ha registrado correctamente');
             setMensaje('');
+        }
+
+        try {
+            setCargando(true);
+            await register({ email, password });
+            setMensajeExito('Se ha registrado correctamente');
+            sessionStorage.setItem('email', email);
+            sessionStorage.setItem('password', password);
+            setMensaje('');
+            navigate('/');
+
+        } catch (error) {
+            setMensaje(error?.message || 'Error al registrar, intente nuevamente');
+            setMensajeExito('');
+
+        } finally {
+            setCargando(false)
         }
 
     }
@@ -58,7 +87,7 @@ const RegisterPage = () => {
                                     {mensajeExito}
                                 </div>
                             )}
-                            <button type="submit" className="btn btn-primary">Registrar</button>
+                            <button type="submit" className="btn btn-primary" disabled={cargando}>{cargando ? 'Registrando...' : 'Registrar'}</button>
                         </form>
                     </div>
 
@@ -68,5 +97,4 @@ const RegisterPage = () => {
     )
 }
 
-export default RegisterPage
 

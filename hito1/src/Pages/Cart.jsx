@@ -6,6 +6,21 @@ import { useUser } from '../Context/UserContext';
 export default function Cart() {
     const { cart, aumentar, disminuir, eliminarDelCarrito, limpiarCarrito, total } = useCart();
     const { token } = useUser();
+    const [completado, setCompletado] = useState(false)
+
+    const manejoCheckout = async () => {
+        const resp = await fetch("http://localhost:5000/api/checkouts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ cart }),
+        })
+        if (resp.ok) {
+            setCompletado(true);
+        }
+    }
 
     if (cart.length === 0) {
         return (
@@ -65,14 +80,10 @@ export default function Cart() {
             </div>
             <div className="row">
                 <div className="col-12">
-                    {!token ? (
-                        <>
-                            <button className='btn btn-dark' disabled>Pagar</button>
-                        </>) : (
-                        <>
-                            <button className='btn btn-dark'>Pagar</button>
-                        </>
-                    )}                    
+
+                    <button onClick={manejoCheckout} className='btn btn-dark' disabled={!token}>Pagar</button>
+                    {completado && <p className='text-success'>Compra exitosa</p>}
+
                 </div>
             </div>
         </div>

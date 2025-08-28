@@ -1,32 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useUser } from '../Context/UserContext';
 
-const Profile = () => {
+export default function Profile() {
+
+    const { email, getPerfil, logout } = useUser();
+
+    useEffect(() => {
+        getPerfil();
+    }, [])
+
 
     return (
         <div>
             <div className="container">
                 <div className="row">
-                    <h4>Mi Perfil</h4>
+                    <h2>Mi Perfil</h2>
                     <div className="mb-3">
-                        <label className="form-label">Email</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name=""
-                            id=""
-                            aria-describedby="helpId"
-                            placeholder=""
-                        />
-                        <small id="helpId" className="form-text text-muted">jose@gmail.com</small>
+                        <h4>Email: {email}</h4>
                         <br />
-                        <input
-                            name=""
-                            id=""
-                            className="btn btn-primary"
-                            type="button"
-                            value="Cerrar sesión"
-                        />
-                        
+                        <button className='btn btn-primary' onClick={logout}>Cerrar sesión</button>
+
 
                     </div>
 
@@ -37,4 +30,3 @@ const Profile = () => {
     )
 }
 
-export default Profile
